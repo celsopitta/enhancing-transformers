@@ -18,6 +18,8 @@ import torch.nn.functional as F
 from einops import rearrange, repeat
 from einops.layers.torch import Rearrange
 
+from flash_attn.flash_attention import FlashMHA
+
 def get_2d_sincos_pos_embed(embed_dim, grid_size):
     """
     grid_size: int or (int, int) of the grid height and width
@@ -139,6 +141,9 @@ class Transformer(nn.Module):
         for idx in range(depth):
             layer = nn.ModuleList([PreNorm(dim, Attention(dim, heads=heads, dim_head=dim_head)),
                                    PreNorm(dim, FeedForward(dim, mlp_dim))])
+            #layer = nn.ModuleList([PreNorm(dim, Attention(dim, heads=heads, dim_head=dim_head)),
+            #                       PreNorm(dim, FeedForward(dim, mlp_dim))])
+
             self.layers.append(layer)
         self.norm = nn.LayerNorm(dim)
 

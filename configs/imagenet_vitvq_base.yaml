@@ -2,7 +2,7 @@ model:
     target: enhancing.modules.stage1.vitvqgan.ViTVQ
     params:
         image_key: image
-        path: /fsx/thuna/enhancing-transformers/experiments/imagenet_vitvq_base/21072022_064447/ckpt/imagenet_vitvq_base-epoch=08.ckpt
+        path: None # /fsx/thuna/enhancing-transformers/experiments/imagenet_vitvq_base/21072022_064447/ckpt/imagenet_vitvq_base-epoch=08.ckpt
         hparams:
             image_size: 256
             patch_size: 8
@@ -29,11 +29,11 @@ dataset:
         train:
             target: enhancing.dataloader.imagenet.ImageNetTrain
             params:
-                root: data/ilsvrc2012
+                root: /mnt/datasets/imagenet2012
                 resolution: 256
 
         validation:
             target: enhancing.dataloader.imagenet.ImageNetValidation
             params:
-                root: data/ilsvrc2012
+                root: /mnt/datasets/imagenet2012
                 resolution: 256
